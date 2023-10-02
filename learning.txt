@@ -1,0 +1,6 @@
+What is emmet?
+By using emmet we need to wrtie less code thean usual 
+ It allows you to type shortcuts that are then expanded into full pieces of code.
+ Just like we use ! tag to write the html main page right?
+
+ 
