@@ -1,13 +1,25 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
+// react element
 
+// react component
 
-// React element 
-// const heading = React.createElement("h1", { id: "heading" }, "Namaste React 🚀"); // this an obejct
-
-//JSX thsi jsx code is transpiled before going to js by parcel bable
-const jsxheading = <h1 className="heading">Namaste React 🚀</h1>
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(jsxheading);
+const Title = () => {
+    return (<h1 className="head" tabIndex="5">
+        Namaste react using JSX
+    </h1>)
+};
+// component composistion 
+const HeadingComponent = () => {
+    return (
+        <div id="container">
+            <Title />
+            <h1 className="heading">Namaste React functional components</h1>
+        </div>
+    )
+};
+const heading = (
+    <h1>Namaste react </h1>
+)
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(< HeadingComponent />)   
