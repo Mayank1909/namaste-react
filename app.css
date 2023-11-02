@@ -24,11 +24,6 @@
     margin: 10px;
 }
 
-.filter-btn {
-    margin: 10px;
-    cursor: pointer;
-}
-
 .res-container {
     display: flex;
     flex-wrap: wrap;
@@ -52,6 +47,58 @@
     border: 3px solid black;
 }
 
+/* .header { */
+/* position: fixed;
+    background-color: white;
+    width: 100%;
+    margin: 20x;
+    padding: 10px; */
+/* } */
+
 .img-logo {
     width: 100%;
+}
+
+.Shimmer-cards {
+    margin: 20px;
+    width: 200px;
+    height: 500px;
+    background-color: rgb(191, 187, 187);
+}
+
+.shimmer-container {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.login-btn {
+    cursor: pointer;
+    width: 100px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: rgb(244, 194, 44);
+    margin: 10px;
+
+}
+
+.login-btn:hover {
+    background-color: rgb(255, 192, 143);
+    border: 4px solid black;
+    width: 110px;
+
+}
+
+.Search {
+    margin: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.filter-btn {
+    cursor: pointer;
+}
+
+.filter {
+    display: inline-block;
 }

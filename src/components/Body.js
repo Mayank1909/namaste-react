@@ -1,10 +1,44 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockdata";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
+
 const Body = () => {
-    const [ListofRestro, setListofRestro] = useState(resList);
-    return (
+    const [ListofRestro, setListofRestro] = useState([]);
+    const [searchText, setsearchText] = useState("");
+    const [filteredrestro, setFilteredRestro] = useState([]);
+
+
+    useEffect(() => {
+        fetchdata();
+    }, []);
+
+    const fetchdata = async () => {
+        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.7333148&lng=76.7794179&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+
+        const json = await data.json();
+        console.log(json);
+        setListofRestro(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRestro(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    };
+    // if (ListofRestro.length === 0) {
+    //     return (<Shimmer />)
+    // }
+
+    return ListofRestro.length === 0 ? <Shimmer /> : (
         <div className="Body">
+            <div className="Search">
+                <input type="search" placeholder="searh restraunts" value={searchText} onChange={(e) => {
+                    setsearchText(e.target.value)
+                }} />
+                <button className="search-btn" onClick={() => {
+                    // filter the list by searched item
+                    //console.log(searchText)
+                    const filteredrestro = ListofRestro.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()))
+
+                    setFilteredRestro(filteredrestro);
+
+                }}>search</button>
+            </div>
             <div className="filter">
                 <button className="filter-btn" onClick={() => {
                     const newlist = ListofRestro.filter(
@@ -14,13 +48,13 @@ const Body = () => {
                     setListofRestro(newlist);
                 }}>Top-rated restaurants</button>
             </div>
+
+
             <div className="res-container">
-                <RestaurantCard resData={resList[1]} />
                 {
-                    ListofRestro.map(restaurant => <RestaurantCard key={restaurant.info.id} resData={restaurant} />)
-                }
-
-
+                    filteredrestro.map((restaurant) => (
+                        <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+                    ))}
 
             </div>
         </div>
