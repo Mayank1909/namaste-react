@@ -24,9 +24,6 @@ const Body = () => {
         setListofRestro(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredRestro(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
-    // if (ListofRestro.length === 0) {
-    //     return (<Shimmer />)
-    // }
 
     return ListofRestro.length === 0 ? <Shimmer /> : (
         <div className="Body">
