@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLable } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ const Body = () => {
     const [searchText, setsearchText] = useState("");
     const [filteredrestro, setFilteredRestro] = useState([]);
 
-
+    const RestroCardPromoted = withPromotedLable(RestaurantCard);
     useEffect(() => {
         fetchdata();
     }, []);
@@ -20,8 +20,8 @@ const Body = () => {
 
         const json = await data.json();
         console.log(json);
-        setListofRestro(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        setFilteredRestro(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setListofRestro(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRestro(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
 
     const onlineStatus = useOnlineStatus();
@@ -30,35 +30,41 @@ const Body = () => {
             <h1>Looks like you are Offline!!! , check your internet connection</h1>
         )
     return ListofRestro.length === 0 ? <Shimmer /> : (
-        <div className="Body">
-            <div className="Search">
-                <input type="search" placeholder="searh restraunts" value={searchText} onChange={(e) => {
-                    setsearchText(e.target.value)
-                }} />
-                <button className="search-btn" onClick={() => {
-                    // filter the list by searched item
-                    //console.log(searchText)
-                    const filteredrestro = ListofRestro.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()))
+        <div className="body">
+            <div className="flex">
+                <div className="Search m-4 p-4">
+                    <input type="search" className="border border-solid border-black p-2 rounded-lg" placeholder="search restaurants" value={searchText} onChange={(e) => {
+                        setsearchText(e.target.value)
+                    }} />
+                    <button className="px-4 py-2 bg-green-100 m-4 rounded-lg font-medium" onClick={() => {
+                        // filter the list by searched item
+                        //console.log(searchText)
+                        const filteredrestro = ListofRestro.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()))
 
-                    setFilteredRestro(filteredrestro);
+                        setFilteredRestro(filteredrestro);
 
-                }}>search</button>
+                    }}>Search</button>
+                </div>
+                <div className="flex item-center m-4 p-4">
+                    <button className="px-4  bg-blue-200 m-4 rounded-lg font-medium" onClick={() => {
+                        const newlist = ListofRestro.filter(
+                            (res) => res?.info?.avgRating > 4
+                        );
+
+                        setListofRestro(newlist);
+                    }}>Top-rated restaurants</button>
+                </div>
             </div>
-            <div className="filter">
-                <button className="filter-btn" onClick={() => {
-                    const newlist = ListofRestro.filter(
-                        (res) => res?.info?.avgRating > 4
-                    );
-
-                    setListofRestro(newlist);
-                }}>Top-rated restaurants</button>
-            </div>
 
 
-            <div className="res-container">
+            <div className="flex flex-wrap items-center m-4 p-4">
                 {
                     filteredrestro.map((restaurant) => (
-                        <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id} ><RestaurantCard resData={restaurant} /></Link>
+                        <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id} >
+
+                            {/* if the restro is promoted use the promoted labe card other wise use the mnormal card */}
+                            {restaurant.info.isOpen ? (<RestroCardPromoted resData={restaurant} />) :
+                                (<RestaurantCard resData={restaurant} />)}</Link>
                     ))
                 }
 
