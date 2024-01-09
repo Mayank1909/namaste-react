@@ -15,6 +15,11 @@ const ItemList = ({ items }) => {
                     <p className="text-xs">{item?.card?.info?.description}</p>
                 </div>
                 <div className="">
+                    <div className="absolute my-20 -mx-10">
+                        <button className="p-2 mx-16 bg-white shadow-lg rounded-lg w-20 text-green-600 font-bold bg-">
+                            ADD +
+                        </button>
+                    </div>
                     <img src={CDN_URL + item?.card?.info?.imageId} className="h-[110px] w-[120px] rounded-lg "
                         alt="myimage" />
                 </div>

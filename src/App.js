@@ -8,13 +8,27 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestroMenu from "./components/RestroMenu";
 import shimmer from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
+import { useState, useContext, useEffect } from "react";
+
 // import Grocery from "./components/Grocery";
 const AppLayout = () => {
-    return <div className="app">
-        <Header />
-        <Outlet />
 
-    </div>
+
+    const [userName, setUserName] = useState();
+    useEffect(() => {
+        const data = {
+            name: "Mayank Joshi",
+        };
+        setUserName(data.name)
+    }, [])
+    return <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app">
+            <Header />
+            <Outlet />
+
+        </div>
+    </UserContext.Provider>
 };
 const Grocery = lazy(() =>
     import("./components/Grocery"));

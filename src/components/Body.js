@@ -1,8 +1,9 @@
 import RestaurantCard, { withPromotedLable } from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 
 const Body = () => {
@@ -20,11 +21,12 @@ const Body = () => {
 
         const json = await data.json();
         console.log(json);
-        setListofRestro(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        setFilteredRestro(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setListofRestro(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRestro(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
 
     const onlineStatus = useOnlineStatus();
+    const { loggedInUser, setUserName } = useContext(UserContext);
     if (onlineStatus === false)
         return (
             <h1>Looks like you are Offline!!! , check your internet connection</h1>
@@ -44,7 +46,9 @@ const Body = () => {
                         setFilteredRestro(filteredrestro);
 
                     }}>Search</button>
+
                 </div>
+
                 <div className="flex item-center m-4 p-4">
                     <button className="px-4  bg-blue-200 m-4 rounded-lg font-medium" onClick={() => {
                         const newlist = ListofRestro.filter(
@@ -53,6 +57,12 @@ const Body = () => {
 
                         setListofRestro(newlist);
                     }}>Top-rated restaurants</button>
+                </div>
+                <div className="search my-11 item-center" >
+                    <label>UserName : </label>
+                    <input type="search" placeholder="Enter your name" className="border  border-black p-2 rounded-lg"
+                        value={loggedInUser}
+                        onChange={(e) => { setUserName(e.target.value) }}></input>
                 </div>
             </div>
 
