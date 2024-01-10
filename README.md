@@ -15,3 +15,12 @@
 - https
 - tree shaiking - parcel will remove unused code for you
 - different buid for dev and production bundle
+
+
+# Redux
+
+- install @reduxjs/toolkit and react-redux
+- Build out store
+- Connect out store to app
+- dispatch(action)
+- Selector

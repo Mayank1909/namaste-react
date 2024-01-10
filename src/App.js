@@ -1,6 +1,6 @@
 import React, { StrictMode, Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./components/Header";
+import Header from "./components/Header"
 import Body from "./components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"
 import About from "./components/About";
@@ -10,8 +10,10 @@ import RestroMenu from "./components/RestroMenu";
 import shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
 import { useState, useContext, useEffect } from "react";
-
-// import Grocery from "./components/Grocery";
+// import { Provider } from 'react-redux'
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Grocery from "./components/Grocery";
 const AppLayout = () => {
 
 
@@ -22,13 +24,15 @@ const AppLayout = () => {
         };
         setUserName(data.name)
     }, [])
-    return <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-        <div className="app">
-            <Header />
-            <Outlet />
+    return (<Provider store={appStore}>
+        <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+            <div className="app">
+                <Header />
+                <Outlet />
 
-        </div>
-    </UserContext.Provider>
+            </div>
+        </UserContext.Provider>
+    </Provider>)
 };
 const Grocery = lazy(() =>
     import("./components/Grocery"));
