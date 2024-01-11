@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-        items: ["burger", "pizza"]
+        items: []
     },
     reducers: {
         addItem: (state, action) => {
@@ -13,10 +13,13 @@ const cartSlice = createSlice({
         removeItem: (state) => {
             state.items.pop();
         },
-        clearCart: (state) => {
-            state.items.length = 0;
+        clearCart: (state, action) => {
+            //rtk - either mutate the existing state or return a new state
+            // state.items.length = 0; //[]
+
+            return { items: [] }; // this will replace the orginal state with []
         },
-    }
+    },
 });
 
 export const { addItem, removeItem, clearCart } = cartSlice.actions;

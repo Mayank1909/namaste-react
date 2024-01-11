@@ -11,7 +11,7 @@ const Header = () => {
     const { loggedInUser } = useContext(UserContext);
     // console.log(loggedInUser);
     // selector
-    const cartItems = useSelector((store) => store.cart.items);
+    const cartItems = useSelector((store) => store?.cart?.items);
     console.log(cartItems);
     return (
         <div className="flex justify-between bg-pink-100 shadow-lg mb-2">
@@ -28,7 +28,7 @@ const Header = () => {
                     <li className="px-2 hover:bg-gray-100"><Link to="/Contact">Contact us</Link></li>
                     <li className="px-2 hover:bg-gray-100"><Link to="/Grocery">Grocery</Link></li>
 
-                    <li className="px-2 font-bold hover:bg-gray-100">Cart {cartItems.length} items</li>
+                    <li className="px-2 font-bold hover:bg-gray-100"><Link to="/cart">Cart ({cartItems.length} items)</Link></li>
                     <button className="login-btn" onClick={() => {
                         loginbtn === "Login" ? setloginbtn("Logout") : setloginbtn("Login")
                     }}>{loginbtn}</button>
@@ -39,3 +39,4 @@ const Header = () => {
     );
 };
 export default Header;
+{/* <Link to="/cart">Cart {cartItems.length} items</Link> */ }
