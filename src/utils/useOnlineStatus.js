@@ -17,4 +17,6 @@ const useOnlineStatus = () => {
     // boolean value
     return onlineStatus;
 }
+
+
 export default useOnlineStatus;

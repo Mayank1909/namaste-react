@@ -15,7 +15,7 @@ const Header = () => {
     const cartItems = useSelector((store) => store?.cart?.items);
     console.log(cartItems);
     return (
-        <div className="flex justify-between bg-pink-100 shadow-lg mb-2">
+        <div className="flex justify-between bg-slate-300 shadow-lg mb-2">
             <div className="logo-container">
                 <img className=" m-3 w-[130px] rounded-[3rem] cursor-pointer" src={LOGO_URL} href="/" alt="" />
 

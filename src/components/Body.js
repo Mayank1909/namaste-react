@@ -20,8 +20,9 @@ const Body = () => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.7333148&lng=76.7794179&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
 
         const json = await data.json();
-        console.log(json);
+        // console.log(json);
         setListofRestro(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        // console.log(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredRestro(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
 
@@ -35,7 +36,7 @@ const Body = () => {
         <div className="body">
             <div className="flex">
                 <div className="Search m-4 p-4">
-                    <input type="search" className="border border-solid border-black p-2 rounded-lg" placeholder="search restaurants" value={searchText} onChange={(e) => {
+                    <input type="search" data-testid="searchInput" className="border border-solid border-black p-2 rounded-lg" placeholder="search restaurants" value={searchText} onChange={(e) => {
                         setsearchText(e.target.value)
                     }} />
                     <button className="px-4 py-2 bg-green-100 m-4 rounded-lg font-medium" onClick={() => {

@@ -31,7 +31,7 @@ const RestroMenu = () => {
             {/* Header for accordian */}
             {categories.map((category, index) => (
                 <RestaurantsCategory
-                    key={category?.card?.card?.info?.title}
+                    key={index}
                     data={category?.card?.card}
                     showItems={(index === showIndex) ? true : false}
                     setShowIndex={(index) => (setShowIndex(index))}  //controleed component as parent is controlling 

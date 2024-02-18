@@ -2,7 +2,7 @@ import Contact from "../Contact"
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom"
 describe("Contact us page test cases", () => {
-    test("should load contacts us component", () => {
+    it("should load contacts us component", () => {
         render(<Contact />);
         // whatever is render over here it will get loaded to jsdom 
         // also here jsx need to be enabled
@@ -12,18 +12,18 @@ describe("Contact us page test cases", () => {
 
 
     });
-    test("should load submit inside component", () => {
+    it("should load submit inside component", () => {
         render(<Contact />);
         const para = screen.getByText("Submit");
         expect(para).toBeInTheDocument();
 
     });
-    test("should load placeholder name ", () => {
+    it("should load placeholder name ", () => {
         render(<Contact />);
         const name = screen.getByPlaceholderText("name")
         expect(name).toBeInTheDocument();
     });
-    test("should load inout boxes name ", () => {
+    it("should load inout boxes name ", () => {
         render(<Contact />);
         //QUERING
         const inputboxes = screen.getAllByRole("textbox")
